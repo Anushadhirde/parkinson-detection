@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parkinson Detection Tool</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Include BoxIcons for premium icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="custom-header">
+        <h1>Parkinson Detection Tool</h1>
+        <p>Upload a vocal recording for automated acoustic analysis</p>
+    </header>
+
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-icon">🫁</div>
+            
+            <h3 class="sidebar-title"><i class='bx bx-microphone'></i> Recording Guide</h3>
+            <div class="sidebar-stats-card">
+                <ul class="bullet-list">
+                    <li>Find a quiet environment.</li>
+                    <li>Mic 10-15 cm from mouth.</li>
+                    <li>Take a deep breath.</li>
+                    <li>Say "Aaaah", "Eeeee", or "Ooooo" steadily for 3-5 seconds.</li>
+                    <li>Save and upload as .wav.</li>
+                </ul>
+            </div>
+            
+            <h3 class="sidebar-title"><i class='bx bx-cog'></i> AI Model Details</h3>
+            <div class="sidebar-stats-card">
+                <ul class="bullet-list">
+                    <li><b>Classifier:</b> SVM (RBF Kernel)</li>
+                    <li><b>Features:</b> Jitter, Shimmer, HNR, MFCCs</li>
+                    <li><b>Analysis:</b> Overlapping window segmentation</li>
+                </ul>
+            </div>
+            
+            <h3 class="sidebar-title"><i class='bx bx-info-circle'></i> Disclaimer</h3>
+            <div class="sidebar-stats-card disclaimer-card">
+                <span class="disclaimer-title">Research Prototype</span>
+                <span class="disclaimer-text">Not validated for medical diagnosis. See a healthcare professional for clinical evaluation.</span>
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <div class="content">
+            <div class="columns">
+                
+                <!-- Upload Column -->
+                <div class="column">
+                    <h3 class="section-title"><span class="step-badge">1</span> Upload Audio</h3>
+                    
+                    <!-- File Dropzone -->
+                    <div id="dropzone" class="dropzone">
+                        <i class='bx bx-cloud-upload bx-lg'></i>
+                        <p class="drop-text">Drag and drop your .wav file here</p>
+                        <p class="drop-sub-text">or click to browse (Max 200MB)</p>
+                        <input type="file" id="fileInput" accept=".wav" hidden>
+                    </div>
+
+                    <!-- Selected File Info (Hidden by default) -->
+                    <div id="fileInfo" class="upload-badge hidden">
+                        <div class="file-details">
+                            <span id="fileName" class="file-name">filename.wav</span>
+                            <span id="fileSize" class="file-size">0 MB</span>
+                        </div>
+                        <button id="clearBtn" class="clear-btn"><i class='bx bx-trash'></i> Clear</button>
+                    </div>
+                    
+                    <button id="analyzeBtn" class="btn-primary hidden"><i class='bx bx-search-alt-2'></i> Analyze Acoustic Signatures</button>
+                    
+                    <div id="errorMsg" class="error-msg hidden"></div>
+                </div>
+
+                <!-- Preview & Results Column -->
+                <div class="column">
+                    <h3 class="section-title"><span class="step-badge">2</span> Preview & Results</h3>
+                    
+                    <!-- Empty State -->
+                    <div id="emptyState" class="info-box empty-state">
+                        <div class="empty-icon">🎧</div>
+                        <h4>Awaiting Audio File</h4>
+                        <p>Upload a recording on the left to begin analysis.</p>
+                    </div>
+
+                    <!-- Audio Preview State (Hidden by default) -->
+                    <div id="previewState" class="info-box hidden">
+                        <b class="preview-title">Audio Preview</b>
+                        <audio id="audioPlayer" controls></audio>
+                    </div>
+
+                    <!-- Loading State (Hidden by default) -->
+                    <div id="loadingState" class="info-box text-center hidden">
+                        <div class="spinning-element">🎙️</div>
+                        <h3 class="loading-title">Extracting Acoustics...</h3>
+                        <p class="loading-text">Running SVM Predictive Model</p>
+                    </div>
+
+                    <!-- Results State (Hidden by default) -->
+                    <div id="resultState" class="hidden">
+                        <!-- Result Card Injected Here Dynamically via JS -->
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="custom-footer">
+        <div class="footer-divider"></div>
+        <p>Developed by <span>The Sonics</span></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
