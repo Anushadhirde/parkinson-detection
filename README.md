@@ -47,7 +47,7 @@ Then open your browser at http://localhost:8501
 .
 You can upload an audio file (preferably a sustained vowel: a, e, i, o, u) and get a prediction result (Healthy / Parkinson).
 
-![Alt text](etc/ui.jpg)
+![Alt text](etc/Screenshot 2026-03-22 223118.png)
 
 ---
 
